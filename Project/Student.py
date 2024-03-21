@@ -31,7 +31,18 @@ def display_std_header():
 
 def display_student(index: int, names: list, ids: list, gpas: list):
     display_std_header()
-    print(f"{names[index]}                          {ids[index]}                     {round(gpas[index],1)}")
+    print(f"{names[index]}                          {ids[index]}                     {round(gpas[index], 1)}")
+
+
+def list_students(names: list, ids: list, gpas: list):
+    if names == []:
+        print("Students list has no students")
+        exit()
+    else:
+        display_std_header()
+        for idx in range(len(names)):
+            print(f"{names[idx]}                          {ids[idx]}                     {round(gpas[idx], 1)}")
+
 
 
 def menu():
@@ -58,5 +69,5 @@ Q - Quit""")
         print("Invalid Input")
         exit()
 
-display_student(2,["Kishan","Uday","Linax"],[111,222,333],[7.5,8.5,4.56])
+list_students(["Kishan","Uday","Linax"],[111,222,333],[7.5,8.5,4.56])
 # menu()
