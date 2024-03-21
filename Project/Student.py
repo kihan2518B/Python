@@ -23,6 +23,18 @@ Students = [
 ]
 
 
+def display_std_header():
+    print("===========================================================")
+    print("Student Name                 StudentID                  GPA")
+    print("===========================================================")
+
+
+def display_student():
+    display_std_header()
+    for student in Students:
+        print(f"{student.get("Name")}                     {student.get("ID")}                     {student.get("GPA")}")
+
+
 def menu():
     fileName = input("Enter the file name to load students information: ")
     if fileName.lower() == "students.txt":
@@ -42,7 +54,7 @@ Q - Quit""")
         exit()
     usersSelection = input()
     if usersSelection.lower() == "l":
-        print("L")
+        display_student()
     else:
         print("Invalid Input")
         exit()
