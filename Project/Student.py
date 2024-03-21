@@ -29,10 +29,9 @@ def display_std_header():
     print("===========================================================")
 
 
-def display_student():
+def display_student(index: int, names: list, ids: list, gpas: list):
     display_std_header()
-    for student in Students:
-        print(f"{student.get("Name")}                     {student.get("ID")}                     {student.get("GPA")}")
+    print(f"{names[index]}                          {ids[index]}                     {round(gpas[index],1)}")
 
 
 def menu():
@@ -59,4 +58,5 @@ Q - Quit""")
         print("Invalid Input")
         exit()
 
-menu()
+display_student(2,["Kishan","Uday","Linax"],[111,222,333],[7.5,8.5,4.56])
+# menu()
