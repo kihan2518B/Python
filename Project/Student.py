@@ -78,6 +78,13 @@ def find_student(stuID: int, listOfIDs: list):
         return listOfIDs.index(stuID)
 
 
+def calculate_average(listOfGPAs: list):
+    sumOfGPAs = 0
+    for i in listOfGPAs:
+        sumOfGPAs += i
+    return sumOfGPAs/len(listOfGPAs)
+
+
 def menu():
     print("*******************************************************")
     print("           ***Students Registration system***          ")
@@ -149,6 +156,18 @@ Q - Quit""")
         else:
             print(f"No student with ID {stuID}\n")
             menu()
+    elif usersSelection.lower() == "g":
+        listOfGPAs = []
+        for student in StudentsLists:
+            listOfGPAs.append(student.get("GPA"))
+        average = calculate_average(listOfGPAs)
+        print(f"GPA Average is {round(average, 2)}")
+        menu()
+    elif usersSelection.lower() == "q":
+        print("""Thanks and Good Bye!
+Please press enter to continue....""")
+        input()
+        exit()
     else:
         print("Invalid Input")
         exit()
