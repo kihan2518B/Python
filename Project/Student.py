@@ -29,9 +29,10 @@ def display_std_header():
     print("===========================================================")
 
 
-def display_student(index: int, names: list, ids: list, gpas: list):
+def display_student(index: int, listOfIDs: list, listOfNames: list, listOfGPAs: list):
     display_std_header()
-    print(f"{names[index]}                          {ids[index]}                     {round(gpas[index], 1)}")
+    print(f"{listOfNames[index]}                          {listOfIDs[index]}                     {round(listOfGPAs[index], 1)}")
+    menu()
 
 
 def list_students(names: list, ids: list, gpas: list):
@@ -70,6 +71,12 @@ def delete_student(index: int, listOfIDs: list, listOfNames: list, listOfGPAs: l
     print(listOfIDs)
     print(f"Student with ID {studentID} is deleted")
     menu()
+
+
+def find_student(stuID: int, listOfIDs: list):
+    print(stuID in listOfIDs)
+    if stuID in listOfIDs:
+        return listOfIDs.index(stuID)
 
 
 def menu():
@@ -127,6 +134,22 @@ Q - Quit""")
             delete_student(index, listOfIDS, listOfNames, listOfGPAs)
         else:
             print(f"No student with ID {inputID} \n")
+            menu()
+    elif usersSelection.lower() == "f":
+        stuID = int(input("Enter student ID: "))
+        listOfIDS = []
+        listOfNames = []
+        listOfGPAs = []
+        for student in StudentsLists:
+            listOfIDS.append(student.get("ID"))
+            listOfNames.append(student.get("Name"))
+            listOfGPAs.append(student.get("GPA"))
+        index = find_student(stuID, listOfIDS)
+        print(index)
+        if index or index == 0:
+            display_student(index, listOfIDS, listOfNames, listOfGPAs)
+        else:
+            print(f"No student with ID {stuID}\n")
             menu()
     else:
         print("Invalid Input")
