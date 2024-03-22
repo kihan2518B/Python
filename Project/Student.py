@@ -1,5 +1,5 @@
 
-Students = [
+StudentsLists = [
     {
         "Name": "John Smith",
         "ID": 111,
@@ -35,39 +35,84 @@ def display_student(index: int, names: list, ids: list, gpas: list):
 
 
 def list_students(names: list, ids: list, gpas: list):
-    if names == []:
+    if not names:
         print("Students list has no students")
-        exit()
+        menu()
     else:
         display_std_header()
         for idx in range(len(names)):
             print(f"{names[idx]}                          {ids[idx]}                     {round(gpas[idx], 1)}")
+        menu()
 
+
+def edit_student(index: int, listOfIDs: list, lisOfNames: list, listOfGPAs: list):
+    print(listOfIDs[index])
+    print(lisOfNames[index])
+    print(listOfGPAs[index])
+    newName = input("Enter Name: ")
+    newGPA = float(input("Enter GPA: "))
+    lisOfNames[index] = newName
+    listOfGPAs[index] = newGPA
+    print(listOfIDs[index])
+    print(lisOfNames[index])
+    print(listOfGPAs[index])
 
 
 def menu():
-    fileName = input("Enter the file name to load students information: ")
-    if fileName.lower() == "students.txt":
-        print("Students Information has been loaded from the file: ")
-        print("*******************************************************")
-        print("           ***Students Registration system***          ")
-        print("Select from the following options\n")
-        print("""L - List Students
+    print("*******************************************************")
+    print("           ***Students Registration system***          ")
+    print("*******************************************************")
+    print("Select from the following options\n")
+    print("""L - List Students
 A - Add Student
 E - Edit Student
 D - Delete Student
 F - Find A Student
 G - GPA Average
 Q - Quit""")
-    else:
-        print(f"{fileName} does not exist - Bye")
-        exit()
+
     usersSelection = input()
     if usersSelection.lower() == "l":
-        display_student()
+        list_students(["Kishan", "Uday", "Nilax"], [111, 222, 333], [7.5, 8.5, 4.56])
+    elif usersSelection.lower() == "a":
+        add_student(["Kishan", "Uday", "Nilax"], [111, 222, 333], [7.5, 8.5, 4.56])
+    elif usersSelection.lower() == "e":
+        listOfIDS = []
+        listOfNames = []
+        listOfGPAs = []
+        for student in StudentsLists:
+            listOfIDS.append(student.get("ID"))
+            listOfNames.append(student.get("Name"))
+            listOfGPAs.append(student.get("GPA"))
+        inputID = int(input("Enter students ID: "))
+        if inputID in listOfIDS:
+            index = listOfIDS.index(inputID)
+            edit_student(index, listOfIDS, listOfNames, listOfGPAs)
     else:
         print("Invalid Input")
         exit()
 
-list_students(["Kishan","Uday","Linax"],[111,222,333],[7.5,8.5,4.56])
-# menu()
+
+def add_student(names: list, ids: list, gpas: list):
+    print("Adding a student ...")
+    newStudentId = int(input("Enter student id: "))
+    for ID in ids:
+        if newStudentId == ID:
+            print(f"A student with ID {ID} already exists")
+            menu()
+
+    newStudentName = input("Enter student name: ")
+    newStudentGPA = float(input("Enter student GPA: "))
+    names.append(newStudentName)
+    ids.append(newStudentId)
+    gpas.append(newStudentGPA)
+    print(f"The student with id {newStudentId} is added.")
+    menu()
+
+
+fileName = input("Enter the file name to load students information: ")
+if fileName.lower() == "students.txt":
+    print("Students Information has been loaded from the file: ")
+    menu()
+else:
+    print(f"{fileName} does not exist - Bye")
