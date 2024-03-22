@@ -74,7 +74,6 @@ def delete_student(index: int, listOfIDs: list, listOfNames: list, listOfGPAs: l
 
 
 def find_student(stuID: int, listOfIDs: list):
-    print(stuID in listOfIDs)
     if stuID in listOfIDs:
         return listOfIDs.index(stuID)
 
@@ -145,7 +144,6 @@ Q - Quit""")
             listOfNames.append(student.get("Name"))
             listOfGPAs.append(student.get("GPA"))
         index = find_student(stuID, listOfIDS)
-        print(index)
         if index or index == 0:
             display_student(index, listOfIDS, listOfNames, listOfGPAs)
         else:
