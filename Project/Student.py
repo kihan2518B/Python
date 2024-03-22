@@ -56,6 +56,20 @@ def edit_student(index: int, listOfIDs: list, lisOfNames: list, listOfGPAs: list
     print(listOfIDs[index])
     print(lisOfNames[index])
     print(listOfGPAs[index])
+    menu()
+
+
+def delete_student(index: int, listOfIDs: list, listOfNames: list, listOfGPAs: list):
+    studentID = listOfIDs[index]
+    print(listOfIDs[index])
+    print(listOfNames[index])
+    print(listOfGPAs[index])
+    listOfIDs.pop(index)
+    listOfNames.pop(index)
+    listOfGPAs.pop(index)
+    print(listOfIDs)
+    print(f"Student with ID {studentID} is deleted")
+    menu()
 
 
 def menu():
@@ -73,10 +87,33 @@ Q - Quit""")
 
     usersSelection = input()
     if usersSelection.lower() == "l":
-        list_students(["Kishan", "Uday", "Nilax"], [111, 222, 333], [7.5, 8.5, 4.56])
+        listOfNames = []
+        listOfGPAs = []
+        listOfIDS = []
+        for student in StudentsLists:
+            listOfIDS.append(student.get("ID"))
+            listOfNames.append(student.get("Name"))
+            listOfGPAs.append(student.get("GPA"))
+        list_students(listOfNames, listOfIDS, listOfGPAs)
+
     elif usersSelection.lower() == "a":
         add_student(["Kishan", "Uday", "Nilax"], [111, 222, 333], [7.5, 8.5, 4.56])
     elif usersSelection.lower() == "e":
+        listOfNames = []
+        listOfGPAs = []
+        listOfIDS = []
+        for student in StudentsLists:
+            listOfIDS.append(student.get("ID"))
+            listOfNames.append(student.get("Name"))
+            listOfGPAs.append(student.get("GPA"))
+        inputID = int(input("Enter students ID: "))
+        if inputID in listOfIDS:
+            index = listOfIDS.index(inputID)
+            edit_student(index, listOfIDS, listOfNames, listOfGPAs)
+        else:
+            print(f"No student with ID {inputID} \n")
+            menu()
+    elif usersSelection.lower() == "d":
         listOfIDS = []
         listOfNames = []
         listOfGPAs = []
@@ -87,7 +124,10 @@ Q - Quit""")
         inputID = int(input("Enter students ID: "))
         if inputID in listOfIDS:
             index = listOfIDS.index(inputID)
-            edit_student(index, listOfIDS, listOfNames, listOfGPAs)
+            delete_student(index, listOfIDS, listOfNames, listOfGPAs)
+        else:
+            print(f"No student with ID {inputID} \n")
+            menu()
     else:
         print("Invalid Input")
         exit()
