@@ -6,8 +6,21 @@
 # Output: abc def
 
 T = int(input())
-# print(listOfString)
+
+
+def odd_even(s):
+    odd = ""
+    even = ""
+    for i in range(len(s)):
+        if i%2 == 0:
+            even += s[i]
+        else:
+            odd += s[i]
+    print(even, odd)
+
 
 listOfInputs = [input() for i in range(T)]
-print(listOfInputs)
+
+for i in listOfInputs:
+    odd_even(i)
 
